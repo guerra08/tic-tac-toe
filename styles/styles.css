@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+.game-grid{
+    display: grid;
+    grid-template-rows: repeat(3, 164px);
+    grid-template-columns: repeat(3, 164px);
+}
+
+.grid-item{
+    background-color: #e0e0e0;
+    text-align: center;
+    height: 164px;
+    width: 164px;
+    border: 2px solid #000;
+}
