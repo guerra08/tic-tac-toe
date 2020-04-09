@@ -1,7 +1,8 @@
 const boxes = Array.from(document.getElementsByClassName("grid-item"))
 const gameMsg = document.getElementById("game-state")
 const grid = _initGrid()
-let turn = 'X'
+let marked = 0
+let turn = randomizeStart()
 let end = false
 gameMsg.innerText = `Current player: ${turn}`
 
@@ -19,7 +20,12 @@ async function makePlay(e) {
     }
     _updateAndCheck(e)
     if (end) {
-        gameMsg.innerText = `${turn} WON THE GAME!`
+        if(marked === 8){
+            gameMsg.innerText = `GAME TIED!`
+        }
+        else{
+            gameMsg.innerText = `${turn} WON THE GAME!`
+        }
         return true
     }
     _switchTurn()
@@ -52,6 +58,7 @@ function _updateAndCheck(e) {
     const row = Math.floor(p / 3)
     const col = (p % 3)
     grid[row][col] = turn
+    marked++
     _checkIfWon(row, col)
 }
 
@@ -83,4 +90,11 @@ function _checkIfWon(row, col) {
         end = true
         return true
     }
+    if(marked === 8){
+        end = true
+    }
+}
+
+function randomizeStart(){
+    return (Math.random() >= 0.5) ? 'X' : 'O' 
 }
